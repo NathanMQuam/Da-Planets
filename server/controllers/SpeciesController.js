@@ -1,6 +1,7 @@
 import express from "express";
 import BaseController from "../utils/BaseController";
 import { speciesService } from "../services/SpeciesService";
+import { speciesPlanetService } from "../services/SpeciesPlanetsService.js";
 
 export class SpeciesController extends BaseController {
    constructor() {
@@ -8,6 +9,7 @@ export class SpeciesController extends BaseController {
       this.router
          .get("", this.getAll)
          .get("/:id", this.getOne)
+         .get("/:id/planets", this.getAllPlanetsBySpeciesId)
          .post("", this.create)
          .delete("/:id", this.delete);
    }
@@ -16,6 +18,14 @@ export class SpeciesController extends BaseController {
          res.send(await speciesService.find(req.query));
       } catch (error) {
          next(error);
+      }
+   }
+
+   async getAllPlanetsBySpeciesId(req, res, next) {
+      try {
+         res.send(await speciesPlanetService.find({ species: req.params.id }))
+      } catch (error) {
+         next(error)
       }
    }
 
