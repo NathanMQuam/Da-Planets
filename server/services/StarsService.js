@@ -7,11 +7,11 @@ class StarsService {
       return stars;
    }
    async findById(id) {
-      let galaxy = await dbContext.Stars.findById(id);
-      if (!galaxy) {
+      let star = await dbContext.Stars.findById(id);
+      if (!star) {
          throw new BadRequest("Invalid Id");
       }
-      return galaxy;
+      return star;
    }
 
    async create(body) {

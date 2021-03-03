@@ -1,21 +1,20 @@
 import express from "express";
 import BaseController from "../utils/BaseController";
-import { starsService } from "../services/StarsService";
-import { planetsService } from "../services/PlanetsService.js";
+import { planetsService } from "../services/PlanetsService";
 
-export class StarsController extends BaseController {
+export class PlanetsController extends BaseController {
    constructor() {
-      super("api/stars");
+      super("api/planets");
       this.router
          .get("", this.getAll)
          .get("/:id", this.getOne)
-         .get("/:id/planets", this.getAllPlanetsByStarId)
+         .get("/:id/moons", this.getAllMoonsByPlanetId)
          .post("", this.create)
          .delete("/:id", this.delete);
    }
    async getAll(req, res, next) {
       try {
-         res.send(await starsService.find(req.query));
+         res.send(await planetsService.find(req.query));
       } catch (error) {
          next(error);
       }
@@ -23,15 +22,15 @@ export class StarsController extends BaseController {
 
    async getOne(req, res, next) {
       try {
-         res.send(await starsService.findById(req.params.id))
+         res.send(await planetsService.findById(req.params.id))
       } catch (error) {
          next(error)
       }
    }
 
-   async getAllPlanetsByStarId(req, res, next) {
+   async getAllMoonsByPlanetId(req, res, next) {
       try {
-         res.send(await planetsService.find({ star: req.params.id }))
+         res.send("getAllMoonsByPlanetId() has not been filled in yet")
       } catch (error) {
          next(error)
       }
@@ -39,7 +38,7 @@ export class StarsController extends BaseController {
 
    async create(req, res, next) {
       try {
-         res.send(201, await starsService.create(req.body));
+         res.send(201, await planetsService.create(req.body));
       } catch (error) {
          next(error);
       }
@@ -47,7 +46,7 @@ export class StarsController extends BaseController {
 
    async delete(req, res, next) {
       try {
-         res.send(await starsService.delete(req.params.id))
+         res.send(await planetsService.delete(req.params.id))
       } catch (error) {
          next(error)
       }
