@@ -7,18 +7,37 @@ export class GalaxiesController extends BaseController {
     super("api/galaxies");
     this.router
       .get("", this.getAll)
+      .get("/:id", this.getOne)
+      .get("/:id/stars", this.getAllStarsByGalaxyId)
       .post("", this.create);
   }
-  async getAll(_, res, next) {
+  async getAll(req, res, next) {
     try {
-      return res.send(["galaxy1", "galaxy2"]);
+      res.send(await galaxiesService.find(req.query));
     } catch (error) {
       next(error);
     }
   }
+
+  async getOne(req, res, next) {
+    try {
+      res.send(await galaxiesService.findById(req.params.id))
+    } catch (error) {
+      next(error)
+    }
+  }
+
+  async getAllStarsByGalaxyId(req, res, next) {
+    try {
+      res.send("getAllStarsByGalaxyId() has not been filled in yet")
+    } catch (error) {
+      next(error)
+    }
+  }
+
   async create(req, res, next) {
     try {
-      res.send(req.body);
+      res.send(201, await galaxiesService.create(req.body));
     } catch (error) {
       next(error);
     }
