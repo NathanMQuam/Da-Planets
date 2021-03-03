@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 const Schema = mongoose.Schema;
 
-const Value = new Schema(
+const Galaxy = new Schema(
   {
     title: { type: String, required: true },
     description: { type: String, required: true }
@@ -9,4 +9,4 @@ const Value = new Schema(
   { timestamps: true, toJSON: { virtuals: true } }
 );
 
-export default Value;
+export default Galaxy;
