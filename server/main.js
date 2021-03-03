@@ -15,5 +15,6 @@ DbContext.connect();
 
 //Start Server
 app.listen(port, () => {
+  console.log("Server started");
   console.log("Server running on port:", port);
 });
