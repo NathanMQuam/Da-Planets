@@ -1,6 +1,7 @@
 import express from "express";
 import BaseController from "../utils/BaseController";
 import { planetsService } from "../services/PlanetsService";
+import { moonsService } from "../services/MoonsService.js";
 
 export class PlanetsController extends BaseController {
    constructor() {
@@ -30,7 +31,7 @@ export class PlanetsController extends BaseController {
 
    async getAllMoonsByPlanetId(req, res, next) {
       try {
-         res.send("getAllMoonsByPlanetId() has not been filled in yet")
+         res.send(await moonsService.find({ planet: req.params.id }))
       } catch (error) {
          next(error)
       }
