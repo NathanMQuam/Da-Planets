@@ -9,7 +9,8 @@ export class StarsController extends BaseController {
          .get("", this.getAll)
          .get("/:id", this.getOne)
          .get("/:id/planets", this.getAllPlanetsByStarId)
-         .post("", this.create);
+         .post("", this.create)
+         .delete("/:id", this.delete);
    }
    async getAll(req, res, next) {
       try {
@@ -40,6 +41,14 @@ export class StarsController extends BaseController {
          res.send(201, await starsService.create(req.body));
       } catch (error) {
          next(error);
+      }
+   }
+
+   async delete(req, res, next) {
+      try {
+         res.send(await starsService.delete(req.params.id))
+      } catch (error) {
+         next(error)
       }
    }
 }

@@ -17,6 +17,10 @@ class StarsService {
    async create(body) {
       return await dbContext.Stars.create(body)
    }
+
+   async delete(id) {
+      return await dbContext.Stars.findByIdAndDelete(id)
+   }
 }
 
 export const starsService = new StarsService();
